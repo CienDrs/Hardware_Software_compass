@@ -1,2 +1,4 @@
 # Hardware_Software_compass
-Project
+
+
+Super projet que nous avons eu le plaisir de réaliser !
