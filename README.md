@@ -19,6 +19,7 @@ This project was implemented with "Quartus II" as software.
 
 ##I2C Driver
 
+![alt text](https://github.com/CienDrs/Hardware_Software_compass/blob/main/state%20machine.jpeg?raw=true)
 
-![alt text](https:///github.com/CienDrs/Hardware_Software_compass/blob/state machine.jpeg?raw=true)
+
 
