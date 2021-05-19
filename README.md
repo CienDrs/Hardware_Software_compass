@@ -14,3 +14,8 @@ The goal of this project is to read the data from a HMC6352 digital compass usin
 * Project title: Design of a I2C driver for a digital compass.
 
 This project was implemented with "Quartus II" as software.
+
+
+
+##I2C Driver
+
