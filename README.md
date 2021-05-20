@@ -57,7 +57,9 @@ When the connection is established with the FPGA, we can send the the executable
 
 ### Setup and wiring
 
-###### ajouter une petite photo cool ?
+Pull-up resistors are used to avoid leaving a floating line in a circuit.
+
+![alt text](https://github.com/CienDrs/Hardware_Software_compass/blob/main/setup.jpg?raw=true)
  
 
 
