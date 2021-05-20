@@ -17,7 +17,7 @@ This project was implemented with "Quartus II" as software.
 
 
 
-###I2C Driver
+### I2C Driver
 
 The file I2C_M uses most of the components we use in this project:
 
