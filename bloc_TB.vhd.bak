@@ -1,0 +1,105 @@
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.std_logic_unsigned.all;
+use ieee.numeric_std.all;
+USE ieee.math_real.ALL;
+use ieee.std_logic_arith.all;
+ 
+entity light_TB is
+end light_TB; 
+
+
+architecture behavior of light_TB is
+
+
+	component light is
+	  port(
+
+		--System 
+		FPGA_CLK1_50   : in std_logic;
+		reset : in std_logic;
+		
+		--I2C signals.
+		sda : inout std_logic;
+		scl : inout std_logic;
+
+		-- Two registers to read the sensor
+		REG1 : in std_logic_vector(8 downto 0);
+		REG2 : in std_logic_vector(8 downto 0);
+		REG3 : in std_logic_vector(8 downto 0);
+		REG_OUT : out std_logic_vector(7 downto 0)
+	  );
+	end component;
+	
+	component I2C_S_RX is
+		generic(
+			WR		: std_logic:= '0';
+					-- device address
+			DEVICE	: std_logic_vector(6 downto 0):= "1000010";		   
+					-- sub address
+			ADDR	: std_logic_vector(7 downto 0):= "01000001"		
+		);
+		port(
+			RST		: in std_logic;
+			SCL		: in std_logic;
+			SDA		: inout std_logic;
+						-- Recepted over i2c data byte
+			DOUT		: out std_logic_vector(7 downto 0);			   
+			DATA_RDY	: out std_logic 					
+		);
+	end component;
+		
+	signal	FPGA_CLK1_50   : std_logic;
+	signal 	reset : std_logic;
+	signal sda :  std_logic;
+	signal scl :  std_logic;
+	signal REG1 : std_logic_vector(7 downto 0);
+	signal REG2 : std_logic_vector(7 downto 0);
+	signal REG3 : std_logic_vector(7 downto 0);
+	signal REG_OUT : std_logic_vector(7 downto 0);
+		 
+	signal i2c_s_rx_data			: std_logic_vector(7 downto 0);
+	signal i2c_s_rx_data_rdy	: std_logic;								
+	
+	BEGIN
+	
+  UUT:light
+  port map(
+		FPGA_CLK1_50       => FPGA_CLK1_50,
+		reset   => reset,
+		sda       => sda,
+		scl      => scl,
+		REG1        => REG1,
+		REG2   => REG2,
+		REG3        => REG3,
+		REG_OUT   => REG_OUT
+	);
+
+	I_I2C_S_RX: I2C_S_RX
+	port map (
+		SCL 		=> scl,
+		RST 		=> reset,
+		SDA 		=> sda,
+		DOUT 		=> i2c_s_rx_data,
+		DATA_RDY	=> i2c_s_rx_data_rdy 
+	); 	
+	
+	P_CLK: process 
+	begin
+		FPGA_CLK1_50 <= '1';
+		wait for clk_period/2;
+		FPGA_CLK1_50 <= '0';
+		wait for clk_period/2;
+	end process;
+	
+	P_RST_N: process
+	begin	
+		reset <= '0';	
+		wait for clk_period*2;
+		reset <= '1';			
+		wait;
+	end process;
+
+
+
+end behavior;
