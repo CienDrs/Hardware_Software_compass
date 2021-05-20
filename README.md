@@ -17,7 +17,7 @@ This project was implemented with "Quartus II" as software.
 
 
 
-1) I2C Driver
+###I2C Driver
 
 The file I2C_M uses most of the components we use in this project:
 
@@ -34,7 +34,7 @@ The state machine is shown on the figure below:
 ![alt text](https://github.com/CienDrs/Hardware_Software_compass/blob/main/state%20machine.jpeg?raw=true)
 
 
-2) Test bench for the compass
+### Test bench for the compass
 
 The test bench simulates the I2C sensor and the driver by plugging their respective entries together.
 
