@@ -25,7 +25,7 @@ USE ieee.math_real.ALL;
 	ARCHITECTURE RTL OF Bloc IS
 	
                 
-	
+	--constant delai : integer := 120e6 ns;
 	constant INPUT_CLK_KHZ 			: integer := 50;
 	constant BUS_CLK_MHZ 			: integer := 400;
 	constant INPUT_CLK_MULTIPLIER : integer := 100;
@@ -139,6 +139,7 @@ type state_type is (s0, s1, s2, s3, s4, s5, s6);
 			--REG3 <=  ( others => '0' );
 		elsif rising_edge(CLOCK_50)then
 			case state is
+			--i2c_m_ena <= '1'; 
 				when s0 => 
 					if i2c_m_busy = '0' then    
 						state <= s1;           			
@@ -146,10 +147,12 @@ type state_type is (s0, s1, s2, s3, s4, s5, s6);
 						i2c_m_rw <= '0'; 
 						--data to be written
 						i2c_m_data_wr <= ADDR;
+						--wait for delai;
 					end if;
 				when s1 =>   
 					i2c_m_ena <= '1';   
 					if i2c_m_reg_rdy = '1' then --METTRE à 0 ?
+					   i2c_m_addr_wr <= DEVICE & '1';
 						state <= s2; 
 						i2c_m_rw <= '1'; 
 						--i2c_m_data_wr <= std_logic_vector(to_unsigned(REGCONF,DATA_WITH));
@@ -160,7 +163,7 @@ type state_type is (s0, s1, s2, s3, s4, s5, s6);
 						i2c_m_ena <= '0';   
   
 						state <= s4;           			
-						i2c_m_addr_wr <= DEVICE & '1';   
+						--i2c_m_addr_wr <= DEVICE & '1';   --test
 						--i2c_m_rw <= '1';      --commenté par théo
 						--data to be written
 					end if;
@@ -168,6 +171,7 @@ type state_type is (s0, s1, s2, s3, s4, s5, s6);
 					--reste s4 et s5 à arranger
 				when s4 =>   
 					i2c_m_ena <= '1';   
+					
 					if i2c_m_val_rdy = '1' then 
 						state <= s5; 
 						REG_OUT <= i2c_m_data_rd;  --on met ce qu'on a lu dans data read MAUVAIS

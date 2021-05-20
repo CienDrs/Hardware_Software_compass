@@ -183,6 +183,7 @@ begin
 				when s1 =>   
 					i2c_m_ena <= '1';   
 					if i2c_m_reg_rdy = '1' then --METTRE à 0 ?
+						i2c_m_addr_wr <= DEVICE & '1';
 						state <= s2; 
 						i2c_m_rw <= '1'; 
 						--i2c_m_data_wr <= std_logic_vector(to_unsigned(REGCONF,DATA_WITH));
@@ -193,7 +194,7 @@ begin
 						i2c_m_ena <= '0';   
   
 						state <= s4;           			
-						i2c_m_addr_wr <= DEVICE & '1';   
+						   
 						--i2c_m_rw <= '1';      --commenté par théo
 						--data to be written
 					end if;
