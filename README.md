@@ -1,5 +1,6 @@
 # Hardware_Software_compass
 
+The file "soc_system_Lucien_Ewan.qar" contains the entire project in a compressed file. Download this file to run the project in your computer.
 
 This project is part of the Hardware/Software Platforms course given at the Faculty of Engineering of Mons in 2021.
 https://web.umons.ac.be/fpms/fr/
