@@ -62,6 +62,11 @@ Pull-up resistors are used to avoid leaving a floating line in a circuit.
 ![alt text](https://github.com/CienDrs/Hardware_Software_compass/blob/main/setup.jpg?raw=true)
  
 
+### Results
+
+When we look at the oscilloscope, we can see that the driver calls for the address 42 (the address of the compass). He then performs a write operation (41) followed by a read operation (43). These 3 signals are correct. However, for a strange reason, the compass return the value ff. A hypothesis might be that the driver doesn't have enough time to read the value. An intermediary state could be added in the state machine of Bloc.vhd to set a delay and give enough time to read the values. 
+
+![alt text](https://github.com/CienDrs/Hardware_Software_compass/blob/main/sbus_conf.png?raw=true)
 
 
 
