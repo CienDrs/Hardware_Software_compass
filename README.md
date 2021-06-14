@@ -50,11 +50,11 @@ We first need to create a file (main.c) to send the compiled project to the FPGA
 
 ## 2) Connect the FPGA to the network
 
-To be able to communicate, the card and the PC must be connected to the network via aRJ45 cable, also known as Ethernet cable. The card must then be identified as a root us
+To be able to communicate, the card and the PC must be connected to the network via aRJ45 cable, also known as Ethernet cable. The card must then be identified as a root user.
 
 ## 3) Transfer executable file to the FPGA
 
-When the connection is established with the FPGA, we can send the the executable file. To do so, we need to open the command prompt and go to the file directory of the project, where the executable file is.
+When the connection is established with the FPGA, we can send the the executable file. To do so, we need to open the command prompt and go to the file directory of the project, where the executable file is. Once all these manipulations are done, you can run the executable file with the command ./"executable file name". You should see the result of the C code that you wrote on the Putty prompt. 
 
 ### Setup and wiring
 
